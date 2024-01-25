@@ -11,7 +11,7 @@ module.exports = (deviceId, patch) => {
         if (error) {
           console.log(`Error while updating device twin : ${error.constructor.name} : ${error.message}`);
         } else {
-          console.log(twin.deviceId + " : twin updated successfully");
+          console.log(`${twin.deviceId} : twin updated successfully\nPatch : ${JSON.stringify(patch)}`);
         }
       });
     }
