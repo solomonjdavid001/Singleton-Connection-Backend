@@ -4,6 +4,7 @@ const { createClient } = require("redis");
 const { DataLakeServiceClient } = require("@azure/storage-file-datalake");
 const { MongoClient } = require("mongodb");
 const { ServiceBusClient } = require("@azure/service-bus");
+const { Registry } = require("azure-iothub");
 const { endpoint, key } = config.db.cosmos;
 const { serverName, authPass } = config.db.redis;
 
@@ -77,10 +78,24 @@ const createServiceBusConnection = (() => {
   }
 })();
 
+const createIoTHubRegistry = (() => {
+  let registry;
+
+  return () => {
+    if(!registry) {
+      console.log("Initializing IoT-Hub Registry");
+      registry = Registry.fromConnectionString(config.iotHub.connectionString);
+    }
+    return registry;
+  }
+})();
+
+
 module.exports = {
   createCosmosConnection,
   createRedisConnection,
   createADLSGen2Connection,
   createMongoConnection,
-  createServiceBusConnection
+  createServiceBusConnection,
+  createIoTHubRegistry
 };

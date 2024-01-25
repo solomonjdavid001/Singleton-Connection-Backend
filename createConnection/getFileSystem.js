@@ -1,7 +1,7 @@
-const createConnection = require("./createConnection");
+const singletonConnection = require("./singletonConnection");
 
 module.exports = (fileSystemName) => {
-    const datalakeServiceClient = createConnection.createADLSGen2Connection();
+    const datalakeServiceClient = singletonConnection.createADLSGen2Connection();
     const fileSystemClient = datalakeServiceClient.getFileSystemClient(fileSystemName);
     return { datalakeServiceClient, fileSystemClient };
 }

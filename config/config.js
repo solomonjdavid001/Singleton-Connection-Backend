@@ -1,4 +1,7 @@
 module.exports = {
+  iotHub: {
+    connectionString: ""
+  },
   db: {
     cosmos: {
       endpoint: "",

@@ -1,7 +1,7 @@
-const createConnection = require("./createConnection");
+const singletonConnection = require("./singletonConnection");
 
 module.exports = (queueNameORtopicName) => {
-    const serviceBusClient = createConnection.createServiceBusConnection();
+    const serviceBusClient = singletonConnection.createServiceBusConnection();
     const sender = serviceBusClient.createSender(queueNameORtopicName);
     return sender;
 }
