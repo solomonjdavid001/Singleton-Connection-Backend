@@ -14,6 +14,8 @@ This project simplifies the management of various database and messaging service
 
 - Redis Connection: Manages Redis client connections using a singleton pattern.
 
+- IoT-Hub: Connection to Azure IoT-Hub and updating device using device twin method
+
 
 ## Prerequisites
 Node Version >= 14.x
