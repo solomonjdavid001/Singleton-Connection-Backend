@@ -1,6 +1,6 @@
-const singletonConnection = require("./singletonConnection");
+const singletonConnection = require("../createConnection/singletonConnection");
 
-module.exports = (deviceId, patch) => {
+const updateDeviceTwin = (deviceId, patch) => {
   let registry = singletonConnection.createIoTHubRegistry();
 
   registry.getTwin(deviceId, (error, twin) => {
@@ -17,3 +17,7 @@ module.exports = (deviceId, patch) => {
     }
   });
 };
+
+module.exports = {
+    updateDeviceTwin
+}
