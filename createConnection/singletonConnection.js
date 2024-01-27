@@ -27,11 +27,10 @@ const createRedisConnection = (() => {
     try {
       if (!redisClient) {
         console.log("Intializing redisClient");
-        redisClient = createClient({
+        redisClient = await createClient({
           // url: `rediss://${serverName}:6380`,
           // password: authPass
-        });
-        await redisClient.connect();
+        }).connect();
       }
       return redisClient;
     } catch (error) {
@@ -57,12 +56,16 @@ const createADLSGen2Connection = (() => {
 const createMongoConnection = (() => {
   let mongoClient;
 
-  return () => {
-    if (!mongoClient) {
-      console.log("Initializing mongoClient");
-      mongoClient = new MongoClient(config.db.mongo.connectionString);
+  return async () => {
+    try {
+      if (!mongoClient) {
+        console.log("Initializing mongoClient");
+        mongoClient = await MongoClient.connect(config.db.mongo.connectionString, config.db.mongo.connectionOptions);
+      }
+      return mongoClient;
+    } catch(error) {
+      console.log("Error while initializing mongoClient", error);
     }
-    return mongoClient;
   };
 })();
 

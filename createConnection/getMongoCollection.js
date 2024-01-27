@@ -1,9 +1,9 @@
 const singletonConnection = require("./singletonConnection");
 const config = require("../config/config");
 
-module.exports = (collectionId) => {
-    const mongoClient = singletonConnection.createMongoConnection();
-    const database = mongoClient.database(config.db.mongo.databaseId);
-    const collection = database.container(collectionId);
+module.exports = async (collectionName) => {
+    const mongoClient = await singletonConnection.createMongoConnection();
+    const database =  mongoClient.db(config.db.mongo.databaseId);
+    const collection =  database.collection(collectionName);
     return collection;
 }
