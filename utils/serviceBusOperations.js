@@ -1,7 +1,7 @@
 const getSBQSender = require("../createConnection/getSBQSender");
 
-const sendMessages = async (queueNameORtopicName, messages) => {
-  const senderClient = getSBQSender(queueNameORtopicName);
+const sendMessages = async (queueName_OR_topicName, messages) => {
+  const senderClient = getSBQSender(queueName_OR_topicName);
   await senderClient.sendMessages(messages);
 };
 
