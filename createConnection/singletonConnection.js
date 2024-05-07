@@ -26,15 +26,15 @@ const createRedisConnection = (() => {
   return async () => {
     try {
       if (!redisClient) {
-        console.log("Intializing redisClient");
+        console.log("Initializing redisClient...");
         redisClient = await createClient({
-          // url: `rediss://${serverName}:6380`,
-          // password: authPass
+          url: serverName,
+          password: authPass
         }).connect();
       }
       return redisClient;
     } catch (error) {
-      console.log("Error while initializing redisClient", error);
+      console.log("Error while initializing redisClient: ", error);
     }
   };
 })();
@@ -44,7 +44,7 @@ const createADLSGen2Connection = (() => {
 
   return () => {
     if (!datalakeServiceClient) {
-      console.log("Initializing datalakeServiceClient");
+      console.log("Initializing datalakeServiceClient...");
       datalakeServiceClient = DataLakeServiceClient.fromConnectionString(
         config.db.adlsGen2.connectionString
       );
@@ -59,12 +59,12 @@ const createMongoConnection = (() => {
   return async () => {
     try {
       if (!mongoClient) {
-        console.log("Initializing mongoClient");
+        console.log("Initializing mongoClient...");
         mongoClient = await MongoClient.connect(config.db.mongo.connectionString, config.db.mongo.connectionOptions);
       }
       return mongoClient;
     } catch(error) {
-      console.log("Error while initializing mongoClient", error);
+      console.log("Error while initializing mongoClient:", error);
     }
   };
 })();
@@ -74,7 +74,7 @@ const createServiceBusConnection = (() => {
 
   return () => {
     if(!serviceBusClient) {
-      console.log("Initializing serviceBusClient");
+      console.log("Initializing serviceBusClient..");
       serviceBusClient = new ServiceBusClient(config.serviceBus.connectionString);
     }
     return serviceBusClient;
@@ -86,7 +86,7 @@ const createIoTHubRegistry = (() => {
 
   return () => {
     if(!registry) {
-      console.log("Initializing IoT-Hub Registry");
+      console.log("Initializing IoT-Hub Registry...");
       registry = Registry.fromConnectionString(config.iotHub.connectionString);
     }
     return registry;
